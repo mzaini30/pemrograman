@@ -78,3 +78,22 @@ Skrip dibuka dengan:
 ```python
 import datetime, os
 ```
+
+Maksud dari skrip di atas berarti kita meng-import modul `datetime` yang berfungsi untuk mengolah waktu seperti tahun, bulan, hari, jam, menit, detik; dan kemudian modul `os` yang berfungsi untuk menjalankan perintah-perintah yang biasa kita ketikkan di Terminal. Kalau di Linux itu berarti Terminal sedangkan kalau di Windows itu namanya Command Prompt.
+
+Contoh dari perintah yang biasa kita ketikkan di Terminal:
+
+- Terminal (Linux)
+	- ls
+	- sudo apt install nama-aplikasinya
+	- sudo dpkg -i nama-aplikasi.deb
+- Command Prompt (Windows)
+	- tree
+	- dir
+	- title
+
+Berarti kalau kita menggunakan modul `os`, maka kita akan memanggilnya dengan:
+
+```python
+os.system('ls')
+```
