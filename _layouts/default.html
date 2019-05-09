@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="alternate" type="application/rss+xml" title="Riviu Buku" href="https://www.muhammadzaini.com/pemrograman/feed" />
 	<link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/vendor/pygments-css/autumn.css">
 	<link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/app/style.css">
 	{% if jekyll.environment == "production" %}
 		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -21,6 +22,34 @@
 	{% endif %}
 </head>
 <body>
+	<div class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<a href="{{ site.baseurl }}/" data-lagu='' class="navbar-brand top">Pemrograman</a>
+				<!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+			        <span class="sr-only">Toggle navigation</span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			    </button> -->
+			</div>
+			<!-- <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		      <ul class="nav navbar-nav">
+		        <li><a href="https://cse.google.com/cse?cx=008906266757256264173:slxoajlu9oo" target="_blank">Cari</a></li>
+		        <li><a href="https://www.instagram.com/mzaini30" target="_blank">Instagram</a></li>
+		        <li><a href="https://play.google.com/store/apps/dev?id=6751907367958089476" target="_blank">Play Store</a></li>
+		      </ul>
+		    </div> -->
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-8 theia">
+				{{ content }}
+			</div>
+			<div class="col-sm-4 theia"></div>
+		</div>
+	</div>
 	<script type="text/javascript" src="{{ site.baseurl }}/vendor/jquery/jquery.min.js"></script>
 	<script type="text/javascript" src="{{ site.baseurl }}/vendor/fixed/ResizeSensor.min.js"></script>
 	<script type="text/javascript" src="{{ site.baseurl }}/vendor/fixed/theia-sticky-sidebar.min.js"></script>
