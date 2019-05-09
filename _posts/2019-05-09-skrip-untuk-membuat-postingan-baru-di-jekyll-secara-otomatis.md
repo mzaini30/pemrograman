@@ -97,3 +97,36 @@ Berarti kalau kita menggunakan modul `os`, maka kita akan memanggilnya dengan:
 ```python
 os.system('ls')
 ```
+
+```python
+judul = input('Masukkan judul postingan: ')
+```
+
+Skrip di atas berarti kita menginginkan suatu inputan yang akan mengisi variabel `judul`.
+
+```python
+sekarang = datetime.datetime.now()
+```
+
+Variabel `sekarang` berisi dengan waktu saat ini.
+
+```python
+karakter_terlarang = ['\\', '/', ':', '*', '?', '"', '\'', '<', '>', '|', '!']
+```
+
+Nah, maksud dari karakter terlarang ini adalah karakter-karakter yang tidak dibolehkan sebagai nama suatu file. Aku dapatnya sih dari Windows. Mungkin kalau Linux kurang lebih.
+
+```python
+# INI BAGIAN JUDUL
+
+judul_kecil = judul.lower().replace(' ', '-')
+for x in karakter_terlarang:
+	judul_kecil = judul_kecil.replace(x, '')
+# print(judul_kecil)
+tanggal_untuk_judul = sekarang.strftime('%Y-%m-%d-')
+# print(tanggal_untuk_judul)
+judul_sekarang = tanggal_untuk_judul + judul_kecil + '.md'
+# print(judul_sekarang)
+```
+
+Itu adalah bagian judul dari file Markdown yang akan dibuat oleh skrip.
