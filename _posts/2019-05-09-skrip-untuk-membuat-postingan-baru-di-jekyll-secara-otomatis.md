@@ -57,3 +57,16 @@ os.system(perintah_string)
 ```bash
 python3 new-post.py
 ```
+
+# Ketika Dijalankan
+
+- Muncul tulisan `Masukkan judul postingan: `
+- Terus kamu masukkan dah itu judulnya. Misalnya aja aku mengetikkan `Cara Membuat Opor Ayam`
+- Maka akan secara otomatis terbuat file `2019-05-09-cara-membuat-opor-ayam.md` di dalam folder `_posts` yang isinya:
+
+	```yaml
+	---
+	layout: post
+	title: Cara Membuat Opor Ayam
+	---
+	```
