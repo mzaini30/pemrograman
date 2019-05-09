@@ -17,6 +17,10 @@ jekyll s
 
 # Menggunakan Port yang Berbeda
 
+Nah, kadang kan kita sudah menggunakan port `4000` yang secara default-nya Jekyll sehingga akan terjadi bentrok karena port sudah digunakan. Berarti kan kita coba menggunakan port yang berbeda. Kita coba nih menggunakan port `2019`. Berikut ini adalah skripnya:
+
 ```bash
 jekyll s --port=2019
 ```
+
+Maka, outputnya adalah <http://localhost:2019>
