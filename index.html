@@ -3,7 +3,7 @@ layout: default
 ---
 
 {% for x in site.posts %}
-	<a href="{{ site.baseurl }}{{ x.url }}">
+	<a href="{{ site.baseurl }}{{ x.url }}" class="item">
 		<div class="panel panel-default">
 			<div class="panel-heading">{{ x.title }}</div>
 			<div class="panel-body">{{ x.content | strip_html | truncatewords: 50 }}</div>

@@ -5,3 +5,12 @@ body {
 .container {
 	max-width: 800px;
 }
+
+.item,
+.item:active,
+.item:hover,
+.item:visited,
+.item:focus {
+	text-decoration: none;
+	color: inherit;
+}
