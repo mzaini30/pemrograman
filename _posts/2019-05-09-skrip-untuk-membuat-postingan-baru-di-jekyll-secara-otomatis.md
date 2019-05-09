@@ -130,3 +130,29 @@ judul_sekarang = tanggal_untuk_judul + judul_kecil + '.md'
 ```
 
 Itu adalah bagian judul dari file Markdown yang akan dibuat oleh skrip.
+
+Lalu bagian isinya:
+
+```python
+judul_baru = str(judul)
+# judul_baru = judul_baru.replace('"', '\\\\\"')
+# judul_baru = '"' + judul_baru + '"'
+# judul_baru = judul_baru.replace('"', '')
+# judul_baru = "\'" + judul_baru + "'"
+# judul_baru = judul_baru.replace("'", '"')
+# print(judul_baru)
+
+perintah = [
+	'cd _posts',
+	'touch ' + judul_sekarang,
+	'echo --- > ' + judul_sekarang,
+	'echo layout: post >> ' + judul_sekarang,
+	'echo "title: ' + judul_baru + '" >> ' + judul_sekarang,
+	'echo --- >> ' + judul_sekarang
+]
+
+perintah_string = ''
+for x in perintah:
+	perintah_string += x + ';'
+os.system(perintah_string)
+```
