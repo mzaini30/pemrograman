@@ -70,3 +70,11 @@ python3 new-post.py
 	title: Cara Membuat Opor Ayam
 	---
 	```
+
+# Penjelasan Skrip
+
+Skrip dibuka dengan:
+
+```python
+import datetime, os
+```
