@@ -134,6 +134,8 @@ Itu adalah bagian judul dari file Markdown yang akan dibuat oleh skrip.
 Lalu bagian isinya:
 
 ```python
+# INI BAGIAN ISI
+
 judul_baru = str(judul)
 # judul_baru = judul_baru.replace('"', '\\\\\"')
 # judul_baru = '"' + judul_baru + '"'
