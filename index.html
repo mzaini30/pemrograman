@@ -2,4 +2,11 @@
 layout: default
 ---
 
-hello world
+{% for x in site.posts %}
+	<a href="{{ site.baseurl }}{{ x.url }}">
+		<div class="panel panel-default">
+			<div class="panel-heading">{{ x.title }}</div>
+			<div class="panel-body">{{ x.content | strip_html | truncatewords: 50 }}</div>
+		</div>
+	</a>
+{% endfor %}
