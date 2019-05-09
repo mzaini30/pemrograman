@@ -51,3 +51,9 @@ for x in perintah:
 	perintah_string += x + ';'
 os.system(perintah_string)
 ```
+
+# Cara Menjalankan
+
+```bash
+python3 new-post.py
+```
