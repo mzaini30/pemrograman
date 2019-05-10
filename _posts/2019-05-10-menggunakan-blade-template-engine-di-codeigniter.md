@@ -28,7 +28,7 @@ if (!function_exists('view')) {
 		$path = APPATH.'views';
 		$blade = new Blade($path, $path . '/cache');
 
-		echo $blade->make($view, $data)
+		echo $blade->make($view, $data);
 	}
 }
 ```
