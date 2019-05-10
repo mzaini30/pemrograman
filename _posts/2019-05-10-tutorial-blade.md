@@ -40,8 +40,9 @@ Now that we have defined a layout for our application, let's define a child page
 
 ## Extending A Layout
 
-When defining a child view, use the Blade `@extends` directive to specify which layout the child view should "inherit". Views which extend a Blade layout may inject content into the layout's sections using @section directives. Remember, as seen in the example above, the contents of these sections will be displayed in the layout using @yield:
+When defining a child view, use the Blade `@extends` directive to specify which layout the child view should "inherit". Views which extend a Blade layout may inject content into the layout's sections using `@section` directives. Remember, as seen in the example above, the contents of these sections will be displayed in the layout using `@yield`:
 
+```php
 <!-- Stored in resources/views/child.blade.php -->
 
 @extends('layouts.app')
@@ -57,14 +58,17 @@ When defining a child view, use the Blade `@extends` directive to specify which 
 @section('content')
     <p>This is my body content.</p>
 @endsection
+```
 
-In this example, the sidebar section is utilizing the @parent directive to append (rather than overwriting) content to the layout's sidebar. The @parent directive will be replaced by the content of the layout when the view is rendered.
+In this example, the sidebar section is utilizing the `@parent` directive to append (rather than overwriting) content to the layout's sidebar. The `@parent` directive will be replaced by the content of the layout when the view is rendered.
 
-    Contrary to the previous example, this sidebar section ends with @endsection instead of @show. The @endsection directive will only define a section while @show will define and immediately yield the section.
+> Contrary to the previous example, this sidebar section ends with `@endsection` instead of `@show`. The `@endsection` directive will only define a section while `@show` will define and immediately yield the section.
 
-The @yield directive also accepts a default value as its second parameter. This value will be rendered if the section being yielded is undefined:
+The `@yield` directive also accepts a default value as its second parameter. This value will be rendered if the section being yielded is undefined:
 
+```php
 @yield('content', View::make('view.name'))
+```
 
 Blade views may be returned from routes using the global view helper:
 
