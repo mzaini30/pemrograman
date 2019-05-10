@@ -32,3 +32,12 @@ We will be using `@include` to bring in slices and `@yield` to bring in content 
 </body>
 </html>
 ```
+
+Blade lets us use the layout that we just created by using `@extends`. By creating `@section`, we create a section that will be used in the layout. Here we use `@section('content')` and in our layout, all that we type here will be injected in `@yield` in the layout.
+
+```php
+@extends('layouts.default')
+@section('content')
+    i am the home page
+@stop
+```
