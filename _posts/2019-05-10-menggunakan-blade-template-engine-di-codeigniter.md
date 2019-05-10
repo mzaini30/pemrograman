@@ -3,6 +3,8 @@ layout: post
 title: Menggunakan Blade Template Engine di Codeigniter
 ---
 
+Sumber: <https://medium.com/easyread/menggunakan-blade-template-engine-pada-codeigniter-369b2eea024c>
+
 ```php
 // application/config/config.php
 
