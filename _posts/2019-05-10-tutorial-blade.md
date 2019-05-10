@@ -72,38 +72,47 @@ The `@yield` directive also accepts a default value as its second parameter. Thi
 
 Blade views may be returned from routes using the global view helper:
 
+```php
 Route::get('blade', function () {
     return view('child');
 });
+```
 
 # Components & Slots
 
 Components and slots provide similar benefits to sections and layouts; however, some may find the mental model of components and slots easier to understand. First, let's imagine a reusable "alert" component we would like to reuse throughout our application:
 
+```php
 <!-- /resources/views/alert.blade.php -->
 
 <div class="alert alert-danger">
-    {{ $slot }}
+    {% raw %}{{ $slot }}{% endraw %}
 </div>
+```
 
-The {{ $slot }} variable will contain the content we wish to inject into the component. Now, to construct this component, we can use the @component Blade directive:
+The `{% raw %}{{ $slot }}{% endraw %}` variable will contain the content we wish to inject into the component. Now, to construct this component, we can use the @component Blade directive:
 
+```php
 @component('alert')
     <strong>Whoops!</strong> Something went wrong!
 @endcomponent
+```
 
 Sometimes it is helpful to define multiple slots for a component. Let's modify our alert component to allow for the injection of a "title". Named slots may be displayed by "echoing" the variable that matches their name:
 
+```php
 <!-- /resources/views/alert.blade.php -->
 
 <div class="alert alert-danger">
-    <div class="alert-title">{{ $title }}</div>
+    <div class="alert-title">{% raw %}{{ $title }}{% endraw %}</div>
 
-    {{ $slot }}
+    {% raw %}{{ $slot }}{% endraw %}
 </div>
+```
 
-Now, we can inject content into the named slot using the @slot directive. Any content not within a @slot directive will be passed to the component in the $slot variable:
+Now, we can inject content into the named slot using the `@slot` directive. Any content not within a `@slot` directive will be passed to the component in the `$slot` variable:
 
+```php
 @component('alert')
     @slot('title')
         Forbidden
@@ -111,56 +120,69 @@ Now, we can inject content into the named slot using the @slot directive. Any co
 
     You are not allowed to access this resource!
 @endcomponent
+```
 
 Passing Additional Data To Components
 
-Sometimes you may need to pass additional data to a component. For this reason, you can pass an array of data as the second argument to the @component directive. All of the data will be made available to the component template as variables:
+Sometimes you may need to pass additional data to a component. For this reason, you can pass an array of data as the second argument to the `@component` directive. All of the data will be made available to the component template as variables:
 
+```php
 @component('alert', ['foo' => 'bar'])
     ...
 @endcomponent
+```
 
 Aliasing Components
 
-If your Blade components are stored in a sub-directory, you may wish to alias them for easier access. For example, imagine a Blade component that is stored at resources/views/components/alert.blade.php. You may use the component method to alias the component from components.alert to alert. Typically, this should be done in the boot method of your AppServiceProvider:
+If your Blade components are stored in a sub-directory, you may wish to alias them for easier access. For example, imagine a Blade component that is stored at `resources/views/components/alert.blade.php`. You may use the component method to alias the component from components.alert to alert. Typically, this should be done in the boot method of your `AppServiceProvider`:
 
+```php
 use Illuminate\Support\Facades\Blade;
 
 Blade::component('components.alert', 'alert');
+```
 
 Once the component has been aliased, you may render it using a directive:
 
+```php
 @alert(['type' => 'danger'])
     You are not allowed to access this resource!
 @endalert
+```
 
 You may omit the component parameters if it has no additional slots:
 
+```php
 @alert
     You are not allowed to access this resource!
 @endalert
+```
 
 # Displaying Data
 
 You may display data passed to your Blade views by wrapping the variable in curly braces. For example, given the following route:
 
+```php
 Route::get('greeting', function () {
     return view('welcome', ['name' => 'Samantha']);
 });
+```
 
 You may display the contents of the name variable like so:
 
-Hello, {{ $name }}.
+```php
+Hello, {% raw %}{{ $name }}{% endraw %}.
+```
 
-    Blade {{ }} statements are automatically sent through PHP's htmlspecialchars function to prevent XSS attacks.
+> Blade `{% raw %}{{ }}{% endraw %}` statements are automatically sent through PHP's `htmlspecialchars` function to prevent XSS attacks.
 
 You are not limited to displaying the contents of the variables passed to the view. You may also echo the results of any PHP function. In fact, you can put any PHP code you wish inside of a Blade echo statement:
 
-The current UNIX timestamp is {{ time() }}.
+The current UNIX timestamp is {% raw %}{{ time() }}{% endraw %}.
 
 Displaying Unescaped Data
 
-By default, Blade {{ }} statements are automatically sent through PHP's htmlspecialchars function to prevent XSS attacks. If you do not want your data to be escaped, you may use the following syntax:
+By default, Blade {% raw %}{{ }}{% endraw %} statements are automatically sent through PHP's htmlspecialchars function to prevent XSS attacks. If you do not want your data to be escaped, you may use the following syntax:
 
 Hello, {!! $name !!}.
 
@@ -216,16 +238,16 @@ Since many JavaScript frameworks also use "curly" braces to indicate a given exp
 
 <h1>Laravel</h1>
 
-Hello, @{{ name }}.
+Hello, @{% raw %}{{ name }}{% endraw %}.
 
-In this example, the @ symbol will be removed by Blade; however, {{ name }} expression will remain untouched by the Blade engine, allowing it to instead be rendered by your JavaScript framework.
+In this example, the @ symbol will be removed by Blade; however, {% raw %}{{ name }}{% endraw %} expression will remain untouched by the Blade engine, allowing it to instead be rendered by your JavaScript framework.
 The @verbatim Directive
 
 If you are displaying JavaScript variables in a large portion of your template, you may wrap the HTML in the @verbatim directive so that you do not have to prefix each Blade echo statement with an @ symbol:
 
 @verbatim
     <div class="container">
-        Hello, {{ name }}.
+        Hello, {% raw %}{{ name }}{% endraw %}.
     </div>
 @endverbatim
 
@@ -317,15 +339,15 @@ Switch statements can be constructed using the @switch, @case, @break, @default 
 In addition to conditional statements, Blade provides simple directives for working with PHP's loop structures. Again, each of these directives functions identically to their PHP counterparts:
 
 @for ($i = 0; $i < 10; $i++)
-    The current value is {{ $i }}
+    The current value is {% raw %}{{ $i }}{% endraw %}
 @endfor
 
 @foreach ($users as $user)
-    <p>This is user {{ $user->id }}</p>
+    <p>This is user {% raw %}{{ $user->id }}{% endraw %}</p>
 @endforeach
 
 @forelse ($users as $user)
-    <li>{{ $user->name }}</li>
+    <li>{% raw %}{{ $user->name }}{% endraw %}</li>
 @empty
     <p>No users</p>
 @endforelse
@@ -343,7 +365,7 @@ When using loops you may also end the loop or skip the current iteration:
         @continue
     @endif
 
-    <li>{{ $user->name }}</li>
+    <li>{% raw %}{{ $user->name }}{% endraw %}</li>
 
     @if ($user->number == 5)
         @break
@@ -355,7 +377,7 @@ You may also include the condition with the directive declaration in one line:
 @foreach ($users as $user)
     @continue($user->type == 1)
 
-    <li>{{ $user->name }}</li>
+    <li>{% raw %}{{ $user->name }}{% endraw %}</li>
 
     @break($user->number == 5)
 @endforeach
@@ -373,7 +395,7 @@ When looping, a $loop variable will be available inside of your loop. This varia
         This is the last iteration.
     @endif
 
-    <p>This is user {{ $user->id }}</p>
+    <p>This is user {% raw %}{{ $user->id }}{% endraw %}</p>
 @endforeach
 
 If you are in a nested loop, you may access the parent loop's $loop variable via the parent property:
@@ -403,7 +425,7 @@ $loop->parent 	When in a nested loop, the parent's loop variable.
 
 Blade also allows you to define comments in your views. However, unlike HTML comments, Blade comments are not included in the HTML returned by your application:
 
-{{-- This comment will not be present in the rendered HTML --}}
+{% raw %}{{-- This comment will not be present in the rendered HTML --}}{% endraw %}
 
 ## PHP
 
@@ -448,7 +470,7 @@ The @error directive may be used to quickly check if validation error messages e
 <input type="text" class="@error('title') is-invalid @enderror">
 
 @error('title')
-    <div class="alert alert-danger">{{ $message }}</div>
+    <div class="alert alert-danger">{% raw %}{{ $message }}{% endraw %}</div>
 @enderror
 
 # Including Sub-Views
@@ -485,7 +507,7 @@ Aliasing Includes
 
 If your Blade includes are stored in a sub-directory, you may wish to alias them for easier access. For example, imagine a Blade include that is stored at resources/views/includes/input.blade.php with the following content:
 
-<input type="{{ $type ?? 'text' }}">
+<input type="{% raw %}{{ $type ?? 'text' }}{% endraw %}">
 
 You may use the include method to alias the include from includes.input to input. Typically, this should be done in the boot method of your AppServiceProvider:
 
@@ -546,7 +568,7 @@ The @inject directive may be used to retrieve a service from the Laravel service
 @inject('metrics', 'App\Services\MetricsService')
 
 <div>
-    Monthly Revenue: {{ $metrics->monthlyRevenue() }}.
+    Monthly Revenue: {% raw %}{{ $metrics->monthlyRevenue() }}{% endraw %}.
 </div>
 
 # Extending Blade
