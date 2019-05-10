@@ -44,3 +44,5 @@ $autoload[‘helper’] = array(‘view’);
 
 return view('index', ['posts' => $data]);
 ```
+
+Lalu pada folder `views`, gunakan ekstensi `blade.php`
