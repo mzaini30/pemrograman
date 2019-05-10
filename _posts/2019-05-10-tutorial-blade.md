@@ -3,13 +3,15 @@ layout: post
 title: Tutorial Blade
 ---
 
-Introduction
+Sumber: <https://laravel.com/docs/5.8/blade>
+
+# Introduction
 
 Blade is the simple, yet powerful templating engine provided with Laravel. Unlike other popular PHP templating engines, Blade does not restrict you from using plain PHP code in your views. In fact, all Blade views are compiled into plain PHP code and cached until they are modified, meaning Blade adds essentially zero overhead to your application. Blade view files use the .blade.php file extension and are typically stored in the resources/views directory.
 
-Template Inheritance
+# Template Inheritance
 
-Defining A Layout
+## Defining A Layout
 
 Two of the primary benefits of using Blade are template inheritance and sections. To get started, let's take a look at a simple example. First, we will examine a "master" page layout. Since most web applications maintain the same general layout across various pages, it's convenient to define this layout as a single Blade view:
 
@@ -34,7 +36,7 @@ As you can see, this file contains typical HTML mark-up. However, take note of t
 
 Now that we have defined a layout for our application, let's define a child page that inherits the layout.
 
-Extending A Layout
+## Extending A Layout
 
 When defining a child view, use the Blade @extends directive to specify which layout the child view should "inherit". Views which extend a Blade layout may inject content into the layout's sections using @section directives. Remember, as seen in the example above, the contents of these sections will be displayed in the layout using @yield:
 
@@ -68,7 +70,7 @@ Route::get('blade', function () {
     return view('child');
 });
 
-Components & Slots
+# Components & Slots
 
 Components and slots provide similar benefits to sections and layouts; however, some may find the mental model of components and slots easier to understand. First, let's imagine a reusable "alert" component we would like to reuse throughout our application:
 
@@ -132,7 +134,7 @@ You may omit the component parameters if it has no additional slots:
     You are not allowed to access this resource!
 @endalert
 
-Displaying Data
+# Displaying Data
 
 You may display data passed to your Blade views by wrapping the variable in curly braces. For example, given the following route:
 
@@ -202,7 +204,7 @@ class AppServiceProvider extends ServiceProvider
     }
 }
 
-Blade & JavaScript Frameworks
+## Blade & JavaScript Frameworks
 
 Since many JavaScript frameworks also use "curly" braces to indicate a given expression should be displayed in the browser, you may use the @ symbol to inform the Blade rendering engine an expression should remain untouched. For example:
 
@@ -221,11 +223,11 @@ If you are displaying JavaScript variables in a large portion of your template, 
     </div>
 @endverbatim
 
-Control Structures
+# Control Structures
 
 In addition to template inheritance and displaying data, Blade also provides convenient shortcuts for common PHP control structures, such as conditional statements and loops. These shortcuts provide a very clean, terse way of working with PHP control structures, while also remaining familiar to their PHP counterparts.
 
-If Statements
+## If Statements
 
 You may construct if statements using the @if, @elseif, @else, and @endif directives. These directives function identically to their PHP counterparts:
 
@@ -287,7 +289,7 @@ You may check if a section has content using the @hasSection directive:
     <div class="clearfix"></div>
 @endif
 
-Switch Statements
+## Switch Statements
 
 Switch statements can be constructed using the @switch, @case, @break, @default and @endswitch directives:
 
@@ -304,7 +306,7 @@ Switch statements can be constructed using the @switch, @case, @break, @default 
         Default case...
 @endswitch
 
-Loops
+## Loops
 
 In addition to conditional statements, Blade provides simple directives for working with PHP's loop structures. Again, each of these directives functions identically to their PHP counterparts:
 
@@ -352,7 +354,7 @@ You may also include the condition with the directive declaration in one line:
     @break($user->number == 5)
 @endforeach
 
-The Loop Variable
+## The Loop Variable
 
 When looping, a $loop variable will be available inside of your loop. This variable provides access to some useful bits of information such as the current loop index and whether this is the first or last iteration through the loop:
 
@@ -391,13 +393,13 @@ $loop->odd 	Whether this is an odd iteration through the loop.
 $loop->depth 	The nesting level of the current loop.
 $loop->parent 	When in a nested loop, the parent's loop variable.
 
-Comments
+## Comments
 
 Blade also allows you to define comments in your views. However, unlike HTML comments, Blade comments are not included in the HTML returned by your application:
 
 {{-- This comment will not be present in the rendered HTML --}}
 
-PHP
+## PHP
 
 In some situations, it's useful to embed PHP code into your views. You can use the Blade @php directive to execute a block of plain PHP within your template:
 
@@ -407,9 +409,9 @@ In some situations, it's useful to embed PHP code into your views. You can use t
 
     While Blade provides this feature, using it frequently may be a signal that you have too much logic embedded within your template.
 
-Forms
+# Forms
 
-CSRF Field
+## CSRF Field
 
 Anytime you define an HTML form in your application, you should include a hidden CSRF token field in the form so that the CSRF protection middleware can validate the request. You may use the @csrf Blade directive to generate the token field:
 
@@ -419,7 +421,7 @@ Anytime you define an HTML form in your application, you should include a hidden
     ...
 </form>
 
-Method Field
+## Method Field
 
 Since HTML forms can't make PUT, PATCH, or DELETE requests, you will need to add a hidden _method field to spoof these HTTP verbs. The @method Blade directive can create this field for you:
 
@@ -429,7 +431,7 @@ Since HTML forms can't make PUT, PATCH, or DELETE requests, you will need to add
     ...
 </form>
 
-Validation Errors
+## Validation Errors
 
 The @error directive may be used to quickly check if validation error messages exist for a given attribute. Within an @error directive, you may echo the $message variable to display the error message:
 
@@ -443,7 +445,7 @@ The @error directive may be used to quickly check if validation error messages e
     <div class="alert alert-danger">{{ $message }}</div>
 @enderror
 
-Including Sub-Views
+# Including Sub-Views
 
 Blade's @include directive allows you to include a Blade view from within another view. All variables that are available to the parent view will be made available to the included view:
 
@@ -489,7 +491,7 @@ Once the include has been aliased, you may render it using the alias name as the
 
 @input(['type' => 'email'])
 
-Rendering Views For Collections
+## Rendering Views For Collections
 
 You may combine loops and includes into one line with Blade's @each directive:
 
@@ -503,7 +505,7 @@ You may also pass a fourth argument to the @each directive. This argument determ
 
     Views rendered via @each do not inherit the variables from the parent view. If the child view requires these variables, you should use @foreach and @include instead.
 
-Stacks
+# Stacks
 
 Blade allows you to push to named stacks which can be rendered somewhere else in another view or layout. This can be particularly useful for specifying any JavaScript libraries required by your child views:
 
@@ -531,7 +533,7 @@ If you would like to prepend content onto the beginning of a stack, you should u
     This will be first...
 @endprepend
 
-Service Injection
+# Service Injection
 
 The @inject directive may be used to retrieve a service from the Laravel service container. The first argument passed to @inject is the name of the variable the service will be placed into, while the second argument is the class or interface name of the service you wish to resolve:
 
@@ -541,7 +543,7 @@ The @inject directive may be used to retrieve a service from the Laravel service
     Monthly Revenue: {{ $metrics->monthlyRevenue() }}.
 </div>
 
-Extending Blade
+# Extending Blade
 
 Blade allows you to define your own custom directives using the directive method. When the Blade compiler encounters the custom directive, it will call the provided callback with the expression that the directive contains.
 
@@ -585,7 +587,7 @@ As you can see, we will chain the format method onto whatever expression is pass
 
     After updating the logic of a Blade directive, you will need to delete all of the cached Blade views. The cached Blade views may be removed using the view:clear Artisan command.
 
-Custom If Statements
+## Custom If Statements
 
 Programming a custom directive is sometimes more complex than necessary when defining simple, custom conditional statements. For that reason, Blade provides a Blade::if method which allows you to quickly define custom conditional directives using Closures. For example, let's define a custom conditional that checks the current application environment. We may do this in the boot method of our AppServiceProvider:
 
